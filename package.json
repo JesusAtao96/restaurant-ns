@@ -1,0 +1,52 @@
+{
+  "nativescript": {
+    "id": "com.restaurant.movil",
+    "tns-ios": {
+      "version": "4.2.0"
+    },
+    "tns-android": {
+      "version": "5.0.0-rc-2018-10-26-162351-01"
+    }
+  },
+  "description": "NativeScript Application",
+  "license": "SEE LICENSE IN <your-license-filename>",
+  "repository": "<fill-your-repository-here>",
+  "scripts": {
+    "lint": "tslint \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "@angular/animations": "~6.1.0",
+    "@angular/common": "~6.1.0",
+    "@angular/compiler": "~6.1.0",
+    "@angular/core": "~6.1.0",
+    "@angular/forms": "~6.1.0",
+    "@angular/http": "~6.1.0",
+    "@angular/platform-browser": "~6.1.0",
+    "@angular/platform-browser-dynamic": "~6.1.0",
+    "@angular/router": "~6.1.0",
+    "nativescript-angular": "~6.1.0",
+    "nativescript-cardview": "^3.1.1",
+    "nativescript-ngx-fonticon": "^4.2.0",
+    "nativescript-secure-storage": "^2.3.0",
+    "nativescript-social-login": "^4.0.1",
+    "nativescript-theme-core": "~1.0.4",
+    "nativescript-toast": "^1.4.6",
+    "nativescript-ui-sidedrawer": "~4.3.0",
+    "reflect-metadata": "~0.1.10",
+    "rxjs": "~6.2.0",
+    "tns-core-modules": "^4.2.1",
+    "zone.js": "~0.8.18"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "~6.1.0",
+    "@nativescript/schematics": "~0.3.0",
+    "@ngtools/webpack": "~6.2.0",
+    "codelyzer": "~4.3.0",
+    "nativescript-dev-sass": "~1.6.0",
+    "nativescript-dev-typescript": "~0.7.0",
+    "nativescript-dev-webpack": "^0.16.2",
+    "tslint": "~5.11.0",
+    "typescript": "~2.7.2"
+  },
+  "readme": "NativeScript Application"
+}

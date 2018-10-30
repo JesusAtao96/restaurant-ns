@@ -1,0 +1,32 @@
+.page  {
+  background-image: url('~/assets/images/login-bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+StackLayout {
+  padding: 20px;
+  vertical-align: center;
+}
+
+Button {
+  color: white;
+  height: 150px;
+}
+
+.login {
+  background: rgba(111, 38, 74, 0.7);
+}
+
+.register {
+  background: rgba(200, 200, 50, 0.7);
+}
+
+.facebook {
+  background: rgba(67, 67, 146, 0.7);
+}
+
+.google {
+  background: rgba(213, 67, 54, 0.7);
+}

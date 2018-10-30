@@ -1,0 +1,57 @@
+<ActionBar title="Restaurant App" class="action-bar">
+  <NavigationButton class="fa" icon="res://baseline_arrow_back_white_24" text="Back to ActionBar" (tap)="routerExtensions.backToPreviousPage()"></NavigationButton>
+</ActionBar>
+
+<app-preloader [loading]="isLoading"></app-preloader>
+
+<GridLayout>
+  <ScrollView class="page">
+    <StackLayout>
+      <CardView class="card" elevation="40" radius="10" ios:shadowRadius="3">
+        <!--<StackLayout class="card-layout">
+          <Label class="card-title h2" text="Iniciar Sesión"></Label>
+          <Label class="" textWrap="true" text="Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun’s rays, the seed grows progressively larger."></Label>
+        </StackLayout>-->
+        <StackLayout class="card-layout">
+          <Label class="card-title h2" text="Regístrate"></Label>
+
+          <StackLayout class="form" [formGroup]="registerForm">
+            <GridLayout rows="auto, auto, auto, auto">
+              <StackLayout row="0" class="input-field">
+                <Label class="h4" text="Nombre"></Label>
+                <TextField class="input" formControlName="name" [isEnabled]="!isLoading" hint="Introduce tu nombre" autocorrect="false"
+                  autocapitalizationType="none" returnKeyType="next" (returnPress)="focusEmail()" required></TextField>
+                  <StackLayout class="hr-light"></StackLayout>
+              </StackLayout>
+
+              <StackLayout row="1" class="input-field">
+                <Label class="h4" text="Email"></Label>
+                <TextField #email class="input" formControlName="email" [isEnabled]="!isLoading" hint="Introduce tu email" keyboardType="email" autocorrect="false"
+                  autocapitalizationType="none" returnKeyType="next" (returnPress)="focusPassword()"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+                <Label class="h4 text-danger" *ngIf="registerForm.get('email').hasError('email')" text="Email incorrecto"></Label>
+              </StackLayout>
+
+              <StackLayout row="2" class="input-field">
+                <Label class="h4" text="Password"></Label>
+                <TextField #password class="input" formControlName="password" [isEnabled]="!isLoading" hint="Introduce tu password" secure="true" returnKeyType="done" (returnPress)="focusRepeatPassword()"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+                <Label class="h4 text-danger" *ngIf="registerForm.get('password').hasError('pattern')" text="Password muy débil"></Label>
+              </StackLayout>
+
+              <StackLayout row="3" class="input-field">
+                <Label class="h4" text="Confirmar Password"></Label>
+                <TextField #repeatPassword class="input" formControlName="confirmPassword" [isEnabled]="!isLoading" hint="Repite el password" secure="true" returnKeyType="done"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+                <Label class="h4 text-danger" *ngIf="registerForm['controls'].confirmPassword.errors?.MatchPassword" text="Los passwords no coinciden"></Label>
+              </StackLayout>
+              
+            </GridLayout>
+
+            <app-button bgColor="rgba(111, 38, 74, 0.7)" [enabled]="!isLoading" title="Registrarme" fontColor="#fff" fontSize="15px" iconName="&#xf344;" (tapBtn)="register()"></app-button>
+          </StackLayout>
+        </StackLayout>
+      </CardView>
+    </StackLayout>
+  </ScrollView>
+</GridLayout>

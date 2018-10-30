@@ -1,0 +1,55 @@
+<!--
+RadSideDrawer is a UI component part of the Progress NativeScript UI set of components.
+Learn more about the RadSideDrawer UI component and how it can be customized in this documentation article:
+http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawer/getting-started
+-->
+<RadSideDrawer [transition]="sideDrawerTransition">
+    <GridLayout tkDrawerContent rows="auto, *" class="sidedrawer sidedrawer-left">
+        <FlexboxLayout row="0" flexDirection="column" class="sidedrawer-header">
+            <FlexboxLayout class="stack-border" *ngIf="userData.img">
+                <Image [src]="userData.img" width="75" height="75" class="header-image"></Image>
+            </FlexboxLayout>
+            <Label class="sidedrawer-header-image fa" text="&#xf2bd;" *ngIf="!userData.img"></Label>
+            <Label class="sidedrawer-header-brand" [text]="userData.name"></Label>
+            <Label class="footnote" [text]="userData.email"></Label>
+        </FlexboxLayout >
+    
+        <ScrollView row="1">
+            <StackLayout class="sidedrawer-content">
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/home')" (tap)="onNavItemTap('/main/home')">
+                    <Label col="0" text="&#xf015;" class="fa"></Label>
+                    <Label col="1" text="Home" class="p-r-10"></Label>
+                </GridLayout>
+
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/browse')" (tap)="onNavItemTap('/main/browse')">
+                    <Label col="0" text="&#xf1ea;" class="fa"></Label>
+                    <Label col="1" text="Browse" class="p-r-10"></Label>
+                </GridLayout>
+
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/search')" (tap)="onNavItemTap('/main/search')">
+                    <Label col="0" text="&#xf002;" class="fa"></Label>
+                    <Label col="1" text="Search" class="p-r-10"></Label>
+                </GridLayout>
+
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/featured')" (tap)="onNavItemTap('/main/featured')">
+                    <Label col="0" text="&#xf005;" class="fa"></Label>
+                    <Label col="1" text="Featured" class="p-r-10"></Label>
+                </GridLayout>
+    
+                <StackLayout class="hr-light"></StackLayout>
+
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/settings')" (tap)="onNavItemTap('/main/settings')">
+                    <Label col="0" text="&#xf013;" class="fa"></Label>
+                    <Label col="1" text="Settings" class="p-r-10"></Label>
+                </GridLayout>
+
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" (tap)="logout()"> <!--[nsRouterLink]="['/start']" clearHistory="true"-->
+                    <Label col="0" text="&#xf08b;" class="fa"></Label>
+                    <Label col="1" text="Sign Out" class="p-r-10"></Label>
+                </GridLayout>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
+
+    <page-router-outlet tkMainContent></page-router-outlet>
+</RadSideDrawer>

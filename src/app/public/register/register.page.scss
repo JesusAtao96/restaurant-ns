@@ -1,0 +1,40 @@
+.page {
+  background-image: url('~/assets/images/login-bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.card {
+  background-color: #fff;
+  color: #4d4d4d;
+  margin: 15 15 0;
+}
+
+.card-layout {
+  padding: 20;
+}
+
+.card-title {
+  margin-bottom: 15;
+  text-align: center;
+}
+
+h4 {
+  padding: 0px;
+  margin: 0px;
+}
+
+.input-field {
+  margin-bottom: 22px;
+}
+
+.input {
+  font-size: 18px;
+  placeholder-color: #A8A8A8;
+}
+
+.input:disabled {
+  background-color: white;
+  opacity: 0.5;
+}
