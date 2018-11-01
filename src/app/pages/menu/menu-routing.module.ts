@@ -9,12 +9,12 @@ const routes: Routes = [
         path: '',
         component: MenuComponent,
         children: [
-            { path: "", redirectTo: "/home", pathMatch: "full" },
-            { path: "home", loadChildren: "~/app/pages/home/home.module#HomeModule" },
-            { path: "browse", loadChildren: "~/app/pages/browse/browse.module#BrowseModule" },
-            { path: "search", loadChildren: "~/app/pages/search/search.module#SearchModule" },
-            { path: "featured", loadChildren: "~/app/pages/featured/featured.module#FeaturedModule" },
-            { path: "settings", loadChildren: "~/app/pages/settings/settings.module#SettingsModule" }
+            { path: "", redirectTo: "/list-restaurant", pathMatch: "full" },
+            { path: 'list-restaurant', loadChildren: '~/app/pages/restaurants/list-restaurant/list-restaurant.module#ListRestaurantPageModule' },
+            { path: 'add-restaurant', loadChildren: '~/app/pages/restaurants/add-restaurant/add-restaurant.module#AddRestaurantPageModule' },
+            { path: 'detail-restaurant/:id', loadChildren: '~/app/pages/restaurants/detail-restaurant/detail-restaurant.module#DetailRestaurantPageModule' },
+            { path: 'reviews', loadChildren: '~/app/pages/reviews/reviews.module#ReviewsPageModule' },
+            { path: 'profile', loadChildren: '~/app/pages/profile/profile.module#ProfilePageModule' }
         ]
     }
 ];

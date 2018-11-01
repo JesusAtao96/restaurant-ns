@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
             console.log('authenticationState', state);
             if (state !== null) {
               if(state) {
-                this.routerExtensions.navigate(["/main/home"], { clearHistory: true });
+                this.routerExtensions.navigate(["/main/list-restaurant"], { clearHistory: true });
               } else {
                 this.routerExtensions.navigate(["/start"], { clearHistory: true });
               }

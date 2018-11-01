@@ -16,36 +16,26 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
     
         <ScrollView row="1">
             <StackLayout class="sidedrawer-content">
-                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/home')" (tap)="onNavItemTap('/main/home')">
-                    <Label col="0" text="&#xf015;" class="fa"></Label>
-                    <Label col="1" text="Home" class="p-r-10"></Label>
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/list-restaurant')" (tap)="onNavItemTap('/main/list-restaurant')">
+                    <Label col="0" text="&#xf30c;" class="ion"></Label>
+                    <Label col="1" text="Restaurantes" class="p-r-10"></Label>
                 </GridLayout>
 
-                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/browse')" (tap)="onNavItemTap('/main/browse')">
-                    <Label col="0" text="&#xf1ea;" class="fa"></Label>
-                    <Label col="1" text="Browse" class="p-r-10"></Label>
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/reviews')" (tap)="onNavItemTap('/main/reviews')">
+                    <Label col="0" text="&#xf2b6;" class="ion"></Label>
+                    <Label col="1" text="Valoreaciones" class="p-r-10"></Label>
+                </GridLayout>
+                
+                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/profile')" (tap)="onNavItemTap('/main/profile')">
+                    <Label col="0" text="&#xf345;" class="ion"></Label>
+                    <Label col="1" text="Perfil" class="p-r-10"></Label>
                 </GridLayout>
 
-                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/search')" (tap)="onNavItemTap('/main/search')">
-                    <Label col="0" text="&#xf002;" class="fa"></Label>
-                    <Label col="1" text="Search" class="p-r-10"></Label>
-                </GridLayout>
-
-                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/featured')" (tap)="onNavItemTap('/main/featured')">
-                    <Label col="0" text="&#xf005;" class="fa"></Label>
-                    <Label col="1" text="Featured" class="p-r-10"></Label>
-                </GridLayout>
-    
                 <StackLayout class="hr-light"></StackLayout>
 
-                <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/main/settings')" (tap)="onNavItemTap('/main/settings')">
-                    <Label col="0" text="&#xf013;" class="fa"></Label>
-                    <Label col="1" text="Settings" class="p-r-10"></Label>
-                </GridLayout>
-
                 <GridLayout columns="auto, *" class="sidedrawer-list-item" (tap)="logout()"> <!--[nsRouterLink]="['/start']" clearHistory="true"-->
-                    <Label col="0" text="&#xf08b;" class="fa"></Label>
-                    <Label col="1" text="Sign Out" class="p-r-10"></Label>
+                    <Label col="0" text="&#xf31f;" class="ion"></Label>
+                    <Label col="1" text="Cerrar sesión" class="p-r-10"></Label>
                 </GridLayout>
             </StackLayout>
         </ScrollView>

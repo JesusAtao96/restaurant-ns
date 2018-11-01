@@ -3,11 +3,12 @@ import { Component, OnInit } from "@angular/core";
 import { DrawerService } from "~/app/shared";
 
 @Component({
-    selector: "Settings",
+    selector: "app-profile",
     moduleId: module.id,
-    templateUrl: "./settings.component.html"
+    templateUrl: "./profile.page.html",
+    styleUrls: ['./profile.page.scss']
 })
-export class SettingsComponent implements OnInit {
+export class ProfilePage implements OnInit {
 
     constructor(public drawerService: DrawerService) {
 

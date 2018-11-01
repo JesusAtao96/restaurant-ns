@@ -3,11 +3,12 @@ import { Component, OnInit } from "@angular/core";
 import { DrawerService } from "~/app/shared";
 
 @Component({
-    selector: "Search",
+    selector: "app-reviews",
     moduleId: module.id,
-    templateUrl: "./search.component.html"
+    templateUrl: "./reviews.page.html",
+    styleUrls: ['./reviews.page.scss']
 })
-export class SearchComponent implements OnInit {
+export class ReviewsPage implements OnInit {
 
     constructor(public drawerService: DrawerService) {
 

@@ -47,7 +47,6 @@ export class MenuComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        console.log("MenuComponent ngAfterViewInit - this.drawerComponent.sideDrawer=");
         this.drawerService.drawer = this.drawerComponent.sideDrawer;
     }
 

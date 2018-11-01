@@ -3,11 +3,12 @@ import { Component, OnInit } from "@angular/core";
 import { DrawerService } from "~/app/shared";
 
 @Component({
-    selector: "Home",
+    selector: 'app-edit-restaurant',
     moduleId: module.id,
-    templateUrl: "./home.component.html"
+    templateUrl: './edit-restaurant.page.html',
+    styleUrls: ['./edit-restaurant.page.scss'],
 })
-export class HomeComponent implements OnInit {
+export class EditRestaurantPage implements OnInit {
 
     constructor(public drawerService: DrawerService) {
 

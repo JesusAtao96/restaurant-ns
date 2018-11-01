@@ -1,0 +1,31 @@
+<ActionBar class="action-bar">
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="Restaurantes"></Label>
+</ActionBar>
+
+<app-preloader [loading]="isLoading"></app-preloader>
+
+<GridLayout rows="auto, *, auto" class="page page-content">
+    <SearchBar row="0" *ngIf="restaurants.length > 0" #sb id="searchbarid" (loaded)="onSearchBarLoaded($event)" hint="Buscar algún restaurante" color="black" (clear)="onClear($event)" (submit)="onSubmit(sb.text)"></SearchBar>
+    <ListView row="1" *ngIf="filteredRestaurants.length > 0" [items]="filteredRestaurants | reverse" class="list-group" separatorColor="rgba(255, 255, 255, .3)">
+        <ng-template let-item="item">
+            <GridLayout columns="40, *, 40" class="list-group-item" (tap)="goToRestaurantDetail(item)">
+                <Image col="0" src="~/assets/images/restaurant.png" width="40"></Image>
+                <Label col="1" class="title" [text]="item.name"></Label>
+                <Label col="2" horizontalAlignment="right" class="ion" text="&#xf28a;"></Label>
+            </GridLayout>
+      </ng-template>
+    </ListView>
+
+    <FlexboxLayout row="1" *ngIf="!isLoading && filteredRestaurants.length == 0" alignItems="center" justifyContent="center">
+        <app-empty text="No hay restaurantes disponibles"></app-empty>
+    </FlexboxLayout >
+
+    <StackLayout row="2">
+        <app-button bgColor="rgba(255, 38, 74, 0.6)" title="Añadir un restaurante" fontColor="#fff" fontSize="15px" iconName="&#xf273;" (tapBtn)="addRestaurant()"></app-button>
+    </StackLayout>
+</GridLayout>

@@ -1,19 +1,19 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 
-import { HomeRoutingModule } from "./home-routing.module";
-import { HomeComponent } from "./home.component";
+import { DetailRestaurantRoutingModule } from "./detail-restaurant-routing.module";
+import { DetailRestaurantPage } from "./detail-restaurant.page";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
-        HomeRoutingModule
+        DetailRestaurantRoutingModule
     ],
     declarations: [
-        HomeComponent
+        DetailRestaurantPage
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class HomeModule { }
+export class DetailRestaurantPageModule { }
