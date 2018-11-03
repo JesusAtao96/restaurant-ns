@@ -13,6 +13,7 @@ const routes: Routes = [
             { path: 'list-restaurant', loadChildren: '~/app/pages/restaurants/list-restaurant/list-restaurant.module#ListRestaurantPageModule' },
             { path: 'add-restaurant', loadChildren: '~/app/pages/restaurants/add-restaurant/add-restaurant.module#AddRestaurantPageModule' },
             { path: 'detail-restaurant/:id', loadChildren: '~/app/pages/restaurants/detail-restaurant/detail-restaurant.module#DetailRestaurantPageModule' },
+            { path: 'edit-restaurant/:id', loadChildren: '~/app/pages/restaurants/edit-restaurant/edit-restaurant.module#EditRestaurantPageModule' },
             { path: 'reviews', loadChildren: '~/app/pages/reviews/reviews.module#ReviewsPageModule' },
             { path: 'profile', loadChildren: '~/app/pages/profile/profile.module#ProfilePageModule' }
         ]

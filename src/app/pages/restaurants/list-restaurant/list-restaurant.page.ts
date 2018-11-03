@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { PlatformLocation } from '@angular/common';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { SearchBar } from "ui/search-bar";
 import { isAndroid } from "platform";
@@ -18,11 +19,15 @@ export class ListRestaurantPage implements OnInit {
     restaurants: RestaurantI[] = [];
     filteredRestaurants: RestaurantI[] = [];
 
-    constructor(public drawerService: DrawerService, private routerExtensions: RouterExtensions, private page: Page, private restaurantS: RestaurantService) { }
+    constructor(public drawerService: DrawerService, private routerExtensions: RouterExtensions, private page: Page, private restaurantS: RestaurantService, private location : PlatformLocation) { }
 
     ngOnInit(): void {
         // Init your component properties here.
         this.getRestaurants();
+
+        this.location.onPopState(() => {
+            this.getRestaurants();
+        });
     }
 
     getRestaurants() {

@@ -5,14 +5,14 @@
 
 <GridLayout>
 	<ScrollView class="page">
-		<StackLayout>
-			<app-button bgColor="rgba(111, 38, 74, 0.7)" title="Entrar" fontColor="#fff" fontSize="15px" iconName="&#xf31e;" (tapBtn)="login()"></app-button>
-			<app-button bgColor="rgba(200, 200, 50, 0.7)" title="Registrarme" fontColor="#fff" fontSize="15px" iconName="&#xf344;" (tapBtn)="register()"></app-button>
-			<app-button bgColor="rgba(67, 67, 146, 0.7)" title="Facebook" fontColor="#fff" fontSize="15px" iconName="&#xf236;" (tapBtn)="facebook()"></app-button>
-			<app-button bgColor="rgba(213, 67, 54, 0.7)" title="Google" fontColor="#fff" fontSize="15px" iconName="&#xf23a;" (tapBtn)="google()"></app-button>
+		<FlexboxLayout flexDirection="column" justifyContent="center" alignItems="center">
+			<app-button [enabled]="!isLoading" bgColor="rgba(111, 38, 74, 0.7)" margin="10px 0px" title="Entrar" fontColor="#fff" fontSize="15px" iconName="&#xf31e;" (tapBtn)="login()"></app-button>
+			<app-button [enabled]="!isLoading" bgColor="rgba(200, 200, 50, 0.7)" margin="10px 0px" title="Registrarme" fontColor="#fff" fontSize="15px" iconName="&#xf344;" (tapBtn)="register()"></app-button>
+			<app-button [enabled]="!isLoading" bgColor="rgba(67, 67, 146, 0.7)" margin="10px 0px" title="Facebook" fontColor="#fff" fontSize="15px" iconName="&#xf236;" (tapBtn)="facebook()"></app-button>
+			<app-button [enabled]="!isLoading" bgColor="rgba(213, 67, 54, 0.7)" margin="10px 0px" title="Google" fontColor="#fff" fontSize="15px" iconName="&#xf23a;" (tapBtn)="google()"></app-button>
 
 			<!--<Button class="btn btn-primary" class="login fa" text="ENTRAR &#xf1ea;" [nsRouterLink]="['/main/home']" clearHistory="true"></Button>
 			<Button class="btn" class="register" text="REGISTRARME" (tap)="login()"></Button>-->
-		</StackLayout>
+		</FlexboxLayout>
 	</ScrollView>
 </GridLayout>

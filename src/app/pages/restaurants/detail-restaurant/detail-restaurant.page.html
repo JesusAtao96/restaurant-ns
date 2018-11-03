@@ -1,8 +1,80 @@
 <ActionBar title="Detalle del Restaurante" class="action-bar">
-    <NavigationButton class="fa" icon="res://baseline_arrow_back_white_24" text="Back to ActionBar" (tap)="routerExtensions.backToPreviousPage()"></NavigationButton>
+    <NavigationButton icon="res://baseline_arrow_back_white_24" text="Back to ActionBar" (tap)="routerExtensions.backToPreviousPage()"></NavigationButton>
+    <ActionItem position="right" (tap)="deleteRestaurant()">
+        <Button class="ion nav-btn" text="&#xf398;"></Button>
+    </ActionItem>
 </ActionBar>
 
+<app-preloader [loading]="isLoading"></app-preloader>
+
 <GridLayout class="page page-content">
-    <Label class="page-icon fa" text="&#xf015;"></Label>
-    <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
+    <ScrollView>
+        <StackLayout>
+            <CardView class="card" elevation="40" radius="10" ios:shadowRadius="3">
+                <StackLayout class="card-layout">
+                    <Label class="card-title h2" [text]="restaurant.name"></Label>
+
+                    <GridLayout rows="auto, auto, auto, auto" class="card-body">
+                        <StackLayout row="0" class="restaurant-image"></StackLayout>
+                        <StackLayout row="1" class="rating-container">
+                            <app-rating *ngIf="ratingTotal !== null" [numbers]="ratingTotal"></app-rating>
+                            <app-rating *ngIf="ratingTotal == null" numbers="0"></app-rating>
+                        </StackLayout>
+                        <StackLayout row="2" class="label-container">
+                            <Label text="Descripción: {{restaurant.description}}"></Label>
+                            <Label text="Dirección: {{restaurant.address}}"></Label>
+                            <Label text="Capacidad: {{restaurant.capacity}}"></Label>
+                        </StackLayout>
+                        <StackLayout row="3" class="btn-container">
+                            <app-button bgColor="rgba(255, 38, 74, 0.8)" title="EDITAR RESTAURANTE" fontColor="#fff"
+                                fontSize="15px" iconName="&#xf2db;" (tapBtn)="goToRestaurantEdit()"></app-button>
+                            <app-button bgColor="rgba(28, 25, 21, 0.7)" title="VOLVER" fontColor="#fff" fontSize="15px"
+                                iconName="&#xf288;" (tapBtn)="routerExtensions.backToPreviousPage()"></app-button>
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+            </CardView>
+
+
+            <CardView class="card" elevation="40" radius="10" ios:shadowRadius="3">
+                <StackLayout class="card-layout">
+                    <Label class="card-title h2" text="Dános tu opinión"></Label>
+
+                    <StackLayout class="card-body">
+                        <GridLayout rows="auto, auto, auto" [formGroup]="commentForm" class="form">
+                            <StackLayout row="0" class="input-field label-container">
+                                <Label text="Puntuación ({{commentForm.value.rating}})"></Label>
+                                <Slider formControlName="rating" minValue="0" maxValue="5" color="#32DB64" backgroundColor="#32DB64"></Slider>
+                            </StackLayout>
+
+                            <StackLayout row="1" class="input-field label-container">
+                                <Label text="Comentario (*)"></Label>
+                                <TextView formControlName="comment" hint="Comentario" [editable]="!isLoading" style.height="250px" class="input input-border"></TextView>
+                            </StackLayout>
+                        </GridLayout>
+                        <app-button bgColor="rgba(255, 38, 74, 0.8)" [enabled]="!isLoading" title="Publicar opinión" fontColor="#fff"
+                            fontSize="15px" iconName="&#xf2b7;" (tapBtn)="publishComment()"></app-button>
+                    </StackLayout>
+                </StackLayout>
+            </CardView>
+
+            <CardView class="card" elevation="40" radius="10" ios:shadowRadius="3" *ngIf="comments.length !== 0">
+                <StackLayout class="card-layout">
+                    <Label class="card-title h2" text="Opiniones"></Label>
+
+                    <FlexboxLayout flexDirection="column" flexWrap="wrap" class="card-body">
+                        <StackLayout class="reviews-container" *ngFor="let comment of comments | reverse">
+                            <Label [text]="comment.comment" textWrap="true"></Label>
+                            <StackLayout class="hr-light"></StackLayout>
+                            <app-rating [numbers]="comment.rating"></app-rating>
+                        </StackLayout>
+                    </FlexboxLayout>
+                </StackLayout>
+            </CardView>
+
+            <StackLayout class="comments-empty">
+                <app-empty text="Sé el primero en opinar" *ngIf="comments.length == 0"></app-empty>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </GridLayout>

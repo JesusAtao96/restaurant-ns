@@ -1,1 +1,6 @@
-<Label class="page-placeholder" text="<!-- Rating Component -->"></Label>
+<FlexboxLayout flexDirection="row" justifyContent="center" class="stars">
+    <StackLayout *ngFor="let star of stars">
+        <Label *ngIf="star.on" class="ion" text="&#xf384;"></Label>
+        <Label *ngIf="!star.on" class="ion" text="&#xf383;"></Label>
+    </StackLayout>
+</FlexboxLayout>

@@ -1,8 +1,10 @@
 <Button 
-    class="btn ion" 
+    class="ion" 
     [style.background]="bgColor"
     [style.color]="fontColor"
     [style.fontSize]="fontSize"
+    [style.margin]="margin"
+    [isUserInteractionEnabled]="enabled"
     [isEnabled]="enabled"  
     [text]="title + '  ' + iconName"
     (tap)="action()">

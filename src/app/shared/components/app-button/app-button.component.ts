@@ -14,6 +14,7 @@ export class AppButtonComponent implements OnInit {
   @Input() fontColor: string;
   @Input() iconName: string;
   @Input() fontSize: string;
+  @Input() margin: string;
 
   @Output() tapBtn = new EventEmitter();
 

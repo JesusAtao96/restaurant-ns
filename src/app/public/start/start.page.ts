@@ -1,7 +1,6 @@
-import { Component, OnInit, NgZone } from "@angular/core";
+import { Component, OnInit, OnDestroy, NgZone } from "@angular/core";
 import { RouterExtensions } from 'nativescript-angular/router';
 
-import * as application from "application";
 
 import * as SocialLogin from 'nativescript-social-login';
 
@@ -13,42 +12,17 @@ import { AuthenticationService } from './../../shared';
     templateUrl: "./start.page.html",
 	styleUrls: ['./start.page.css']
 })
-export class StartPage implements OnInit {
+export class StartPage implements OnInit, OnDestroy {
 
     isLoading: boolean = false;
 
     constructor(private routerExtensions: RouterExtensions, private ngZone: NgZone, private authService: AuthenticationService) {
-        if (application.android) {
-            application.android.on(application.AndroidApplication.activityResumedEvent, () => {
-                let result = SocialLogin.init({
-                    activity: void 0,
-                    google: {
-                        initialize: true,
-                        isRequestAuthCode: false,
-                        serverClientId: "957816712825-l4rf1bio6q3l34uq1ucck7tunf2dlj2u.apps.googleusercontent.com",
-                        shouldFetchBasicProfile: true,
-                        scopes: ["profile", "email"]
-                    }
-                });
-            });
-        } else if (application.ios) {
-            let result = SocialLogin.init({
-                activity: void 0,
-                google: {
-                    initialize: true,
-                    isRequestAuthCode: false,
-                    serverClientId: "957816712825-l4rf1bio6q3l34uq1ucck7tunf2dlj2u.apps.googleusercontent.com",
-                    shouldFetchBasicProfile: true,
-                    scopes: ["profile", "email"]
-                }
-            });
-        }
+        
     }
 
     ngOnInit(): void {
         
     }
-
 
     login() {
         console.log('Login tap');
@@ -85,7 +59,6 @@ export class StartPage implements OnInit {
                 if(result.code == 0) {
                     this.authService.facebook({access_token: result.authToken}).subscribe(
                         (res) => {
-                            this.isLoading = false;
                             console.log('res', res);
                             this.authService.setToken(res);
                         },
@@ -121,7 +94,6 @@ export class StartPage implements OnInit {
                 if(result.code == 0) {
                     this.authService.google({idtoken: result.authToken}).subscribe(
                         (response) => {
-                            this.isLoading = false;
                             console.log('response', response);
                             this.authService.setToken(response);
                         },
@@ -138,6 +110,10 @@ export class StartPage implements OnInit {
                 
             });
         });
+    }
+
+    ngOnDestroy() {
+        this.isLoading = false;
     }
 
 }

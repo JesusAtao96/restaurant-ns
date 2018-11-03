@@ -5,14 +5,8 @@
   background-size: cover;
 }
 
-StackLayout {
+FlexboxLayout {
   padding: 20px;
-  vertical-align: center;
-}
-
-Button {
-  color: white;
-  height: 150px;
 }
 
 .login {

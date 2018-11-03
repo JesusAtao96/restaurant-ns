@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { RouterExtensions } from 'nativescript-angular/router';
 
 import { DrawerService } from "~/app/shared";
 
@@ -10,7 +11,7 @@ import { DrawerService } from "~/app/shared";
 })
 export class EditRestaurantPage implements OnInit {
 
-    constructor(public drawerService: DrawerService) {
+    constructor(public drawerService: DrawerService, public routerExtensions: RouterExtensions) {
 
     }
 
@@ -18,10 +19,4 @@ export class EditRestaurantPage implements OnInit {
         // Init your component properties here.
     }
 
-    onDrawerButtonTap(): void {
-        console.log('onDrawerButtonTap');
-        this.drawerService.toggle();
-        /*const sideDrawer = <RadSideDrawer>app.getRootView();
-        sideDrawer.showDrawer();*/
-    }
 }

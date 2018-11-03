@@ -10,16 +10,14 @@ export class RatingComponent implements OnInit {
   
   @Input() numbers: Number;
   stars: Array<any> = [];
-
-
   constructor() { }
 
   ngOnInit() {
     for (let index = 1; index <= 5; index++) {
       if(index <= this.numbers) {
-        this.stars.push({icon: 'star'});
+        this.stars.push({on: true});
       } else {
-        this.stars.push({icon: 'star-outline'});
+        this.stars.push({on: false});
       }
     }
   }

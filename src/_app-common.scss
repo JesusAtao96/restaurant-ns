@@ -6,9 +6,6 @@
     color: white;
 }
 
-.text-danger {
-    color: #ff2858;
-}
 
 // Common page class
 .page-content {
@@ -28,9 +25,22 @@
     }
 }
 
+.text-danger {
+    color: #ff2858;
+}
+
 //Action bar
 ActionBar .action-bar-title {
     horizontal-align: center;
+}
+
+.nav-btn {
+    font-size: 25em;
+    margin: 0px;
+    width: 120px;
+    background: #C8264A;
+    border-color: transparent;
+    z-index: 0; 
 }
 
  // Drawer navigation custom styles
