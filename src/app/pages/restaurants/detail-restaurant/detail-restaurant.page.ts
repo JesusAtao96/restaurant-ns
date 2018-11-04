@@ -1,7 +1,7 @@
 import { Component , OnInit } from "@angular/core";
-import { PlatformLocation } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
+import { RouterExtensions } from 'nativescript-angular/router';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { RouterExtensions, } from 'nativescript-angular/router';
 
 import { PageRoute } from "nativescript-angular/router";
 import { switchMap } from "rxjs/operators";
@@ -28,70 +28,75 @@ export class DetailRestaurantPage implements OnInit {
     commentForm: FormGroup;
     comments: CommentI[] = [];
 
-    constructor(public routerExtensions: RouterExtensions, private pageRoute: PageRoute, private restaurantS: RestaurantService, private location : PlatformLocation, public fb: FormBuilder) {
-        this.commentForm = this.fb.group({
-            comment: ['', Validators.required],
-            rating: [0, Validators.required],
-        });
+    constructor(public routerExtensions: RouterExtensions, private pageRoute: PageRoute, private restaurantS: RestaurantService, public fb: FormBuilder, private router: Router) {
+      this.commentForm = this.fb.group({
+        comment: ['', Validators.required],
+        rating: [0, Validators.required],
+      });
     }
 
     ngOnInit(): void {
-        this.pageRoute.activatedRoute.pipe(
-            switchMap(activatedRoute => activatedRoute.params)
-        ).forEach((params) => { 
-            this.paramsId = params["id"]; 
-            console.log('this.paramsId', this.paramsId);
-            
-            this.isLoading = true;
-            this.getRestaurantDetail();
-            this.getRestaurantComments();
-        });
+      this.pageRoute.activatedRoute.pipe(
+        switchMap(activatedRoute => activatedRoute.params)
+      ).forEach((params) => { 
+        this.paramsId = params["id"]; 
+        console.log('this.paramsId', this.paramsId);
+          
+        this.isLoading = true;
+        this.getRestaurantDetail();
+        this.getRestaurantComments();
+      });
 
-        this.location.onPopState(() => {
+      this.router.events.subscribe(event => {
+        if(event instanceof NavigationEnd) {
+          if (this.router.url == `/main/detail-restaurant/${this.paramsId}`) {
+            console.log('DetailRestaurantPage', this.router.url, `/main/detail-restaurant/${this.paramsId}`);
             this.isLoading = true;
             this.getRestaurantDetail();
             this.getRestaurantComments();
-        });
+          }
+        }
+      });
     }
 
     getRestaurantDetail() {
-        this.restaurantS.getRestaurantXId(this.paramsId).subscribe(
-          (response) => {
-            this.isLoading = false;
-            this.restaurant = response.restaurant;
-            //console.log('getRestaurantXId', this.restaurant);
-          },
-          (error) => {
-            this.isLoading = false;
-            console.log(error);
-          }
-        );
+      this.restaurantS.getRestaurantXId(this.paramsId).subscribe(
+        (response) => {
+          this.isLoading = false;
+          this.restaurant = response.restaurant;
+          //console.log('getRestaurantXId', this.restaurant);
+        },
+        (error) => {
+          this.isLoading = false;
+          console.log(error);
+        }
+      );
     }
 
     getRestaurantComments() {
-        this.restaurantS.getCommentsXId(this.paramsId).subscribe(
-          (response) => {
-            this.isLoading = false;
-            this.comments = response.comments;
-            //console.log('getCommentsXId', this.comments);
-            
-            if(this.comments.length !== 0) {
-              this.comments.forEach(comment => {
-                this.ratingTotal = this.ratingTotal + comment.rating;
-              });
-      
-              this.ratingTotal = Math.round(this.ratingTotal / this.comments.length);
-            } else {
-              this.ratingTotal = 0;
-            }
-            
-            //console.log('this.ratingTotal', this.ratingTotal)
-          },
-          (error) => {
-            this.isLoading = false;
-            console.log(error);
+      this.restaurantS.getCommentsXId(this.paramsId).subscribe(
+        (response) => {
+          this.isLoading = false;
+          this.comments = response.comments;
+          //console.log('getCommentsXId', this.comments);
+          
+          if(this.comments.length !== 0) {
+            this.comments.forEach(comment => {
+              this.ratingTotal = this.ratingTotal + comment.rating;
+            });
+    
+            this.ratingTotal = Math.round(this.ratingTotal / this.comments.length);
+          } else {
+            this.ratingTotal = 0;
           }
-        );
+          
+          //console.log('this.ratingTotal', this.ratingTotal)
+        },
+        (error) => {
+          this.isLoading = false;
+          console.log(error);
+        }
+      );
     }
 
     alert(message: string) {
@@ -108,26 +113,26 @@ export class DetailRestaurantPage implements OnInit {
     }
 
     publishComment() {
-        //this.commentForm.setValue({restaurant: this.paramsId});
-        appUtils.dismissSoftKeybaord();
-        if (this.commentForm.invalid) {
-          this.alert("Por favor, ingrese la puntuación y su comentario.");
-          return;
-        }
+      //this.commentForm.setValue({restaurant: this.paramsId});
+      appUtils.dismissSoftKeybaord();
+      if (this.commentForm.invalid) {
+        this.alert("Por favor, ingrese la puntuación y su comentario.");
+        return;
+      }
 
-        this.commentForm.value.restaurant = this.paramsId;
-        this.restaurantS.createComment(this.commentForm.value).subscribe(
-          (response) => {
-            this.ratingTotal = null;
-            this.commentForm.reset()
-            this.commentForm.value.rating = 0;
-            this.isLoading = true;
-            this.getRestaurantComments();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+      this.commentForm.value.restaurant = this.paramsId;
+      this.restaurantS.createComment(this.commentForm.value).subscribe(
+        (response) => {
+          this.ratingTotal = null;
+          this.commentForm.reset()
+          this.commentForm.value.rating = 0;
+          this.isLoading = true;
+          this.getRestaurantComments();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
 
     deleteRestaurant() {
@@ -153,7 +158,7 @@ export class DetailRestaurantPage implements OnInit {
     }
 
     goToRestaurantEdit() {
-        this.routerExtensions.navigate(["/main/edit-restaurant", this.paramsId]);
+      this.routerExtensions.navigate(["/main/edit-restaurant", this.paramsId]);
     }
 
 }

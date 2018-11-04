@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { PlatformLocation } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { SearchBar } from "ui/search-bar";
 import { isAndroid } from "platform";
 import { Page } from "ui/page"
 
 import { DrawerService, RestaurantService, RestaurantI } from "~/app/shared";
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: "app-list-restaurant",
@@ -14,19 +15,26 @@ import { DrawerService, RestaurantService, RestaurantI } from "~/app/shared";
     styleUrls: ['./list-restaurant.page.scss']
 })
 export class ListRestaurantPage implements OnInit {
-
+    
+    subscription: Subscription;
     isLoading: boolean = false;
     restaurants: RestaurantI[] = [];
     filteredRestaurants: RestaurantI[] = [];
 
-    constructor(public drawerService: DrawerService, private routerExtensions: RouterExtensions, private page: Page, private restaurantS: RestaurantService, private location : PlatformLocation) { }
+    constructor(public drawerService: DrawerService, private routerExtensions: RouterExtensions, private page: Page, private restaurantS: RestaurantService, private router: Router) {
+        
+    }
 
     ngOnInit(): void {
-        // Init your component properties here.
         this.getRestaurants();
 
-        this.location.onPopState(() => {
-            this.getRestaurants();
+        this.router.events.subscribe(event => {
+            if(event instanceof NavigationEnd) {
+                if (this.router.url == "/main/list-restaurant") {
+                    console.log('ListRestaurantPage', this.router.url);
+                    this.getRestaurants();
+                }
+            }
         });
     }
 
@@ -37,7 +45,7 @@ export class ListRestaurantPage implements OnInit {
             this.restaurants = response.restaurants;
             this.filteredRestaurants = response.restaurants;
             this.isLoading = false;
-            console.log('this.restaurants', this.restaurants)
+            //console.log('this.restaurants', this.restaurants)
           },
           (err) => {
             this.isLoading = false;
@@ -82,7 +90,7 @@ export class ListRestaurantPage implements OnInit {
     }
 
     goToRestaurantDetail(restaurant) {
-        console.log('goToRestaurantDetail', restaurant)
+        //console.log('goToRestaurantDetail', restaurant)
         this.routerExtensions.navigate(["/main/detail-restaurant", restaurant._id], {
             transition: { name: 'slide', curve: 'linear'}
         });
